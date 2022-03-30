@@ -1,4 +1,4 @@
-<span style="font-family: 'Lucida Console';">foo</span>
+# Device Fault Detection Analytic
 
 Faulty devices can either affect the whole performance of a system by getting disconnected or by staying connected to the network while not performing as expected and sending wrong readings to intended data recipients. The aim of this analytic is to ensure network reliability, service availability, good performance, and better monitoring of connected devices for service restoring and correction action time minimization in case an anomaly has been detected. 
 
