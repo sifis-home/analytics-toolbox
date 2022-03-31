@@ -1,0 +1,214 @@
+<Policy
+	xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" PolicyId="policy2Attributes" RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:deny-overrides" Version="3.0" >
+	<Description >Parenta policy with two different rules: time rule and advisory rule</Description>
+	<Target ></Target>
+
+
+	<Rule Effect="Deny" RuleId="rule-deny-hard" >
+		<Target >
+			
+		</Target>
+		<ObligationExpressions>
+			<ObligationExpression ObligationId="STRONG" FulfillOn="Deny"/>
+		</ObligationExpressions>
+		
+		<!-- Pre condition -->
+		<Condition DecisionTime="pre" >
+			<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and" >
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-greater-than-or-equal" >
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-one-and-only" >
+						<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:current-time" DataType="http://www.w3.org/2001/XMLSchema#time" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" MustBePresent="true">
+						</AttributeDesignator>
+
+					</Apply>
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#time">15:36:00</AttributeValue>
+				</Apply>
+
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-less-than-or-equal" >
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-one-and-only" >
+						<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:current-time" DataType="http://www.w3.org/2001/XMLSchema#time" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" MustBePresent="true">
+						</AttributeDesignator>
+
+					</Apply>
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#time">15:37:00</AttributeValue>
+				</Apply>
+			</Apply>
+		</Condition>
+		
+		<!-- Ongoing condition -->
+		<Condition DecisionTime="ongoing" >
+		<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and" >
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-greater-than-or-equal" >
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-one-and-only" >
+						<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:current-time" DataType="http://www.w3.org/2001/XMLSchema#time" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" MustBePresent="true">
+						</AttributeDesignator>
+
+					</Apply>
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#time">15:36:00</AttributeValue>
+				</Apply>
+
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-less-than-or-equal" >
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-one-and-only" >
+						<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:current-time" DataType="http://www.w3.org/2001/XMLSchema#time" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" MustBePresent="true">
+						</AttributeDesignator>
+
+					</Apply>
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#time">15:37:00</AttributeValue>
+				</Apply>
+			</Apply>
+		</Condition>
+
+		<!-- Post condition -->
+		<Condition DecisionTime="post" >
+			<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and" >
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-greater-than-or-equal" >
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-one-and-only" >
+						<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:current-time" DataType="http://www.w3.org/2001/XMLSchema#time" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" MustBePresent="true">
+						</AttributeDesignator>
+
+					</Apply>
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#time">14:56:00</AttributeValue>
+				</Apply>
+
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-less-than-or-equal" >
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-one-and-only" >
+						<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:current-time" DataType="http://www.w3.org/2001/XMLSchema#time" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" MustBePresent="true">
+						</AttributeDesignator>
+
+					</Apply>
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#time">14:57:00</AttributeValue>
+				</Apply>
+			</Apply>
+		</Condition>
+	</Rule>
+
+	<Rule Effect="Deny" RuleId="rule-deny-soft" >
+		<Target >
+			
+		</Target>
+		<ObligationExpressions>
+			<ObligationExpression ObligationId="SOFT" FulfillOn="Deny"/>
+		</ObligationExpressions>
+		
+
+		<Condition DecisionTime="pre" >
+			<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:or" >
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and" >
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:advisory" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string" >RED</AttributeValue>
+					</Apply>
+
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-greater-than-or-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:child" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#integer" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer" >1</AttributeValue>
+					</Apply>
+				</Apply>
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and" >
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:advisory" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string" >YELLOW</AttributeValue>
+					</Apply>
+
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:adult" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#integer" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer" >0</AttributeValue>
+					</Apply>
+				</Apply>
+			</Apply>
+		</Condition>
+
+		<Condition DecisionTime="ongoing" >
+			<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:or" >
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and" >
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:advisory" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string" >RED</AttributeValue>
+					</Apply>
+
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-greater-than-or-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:child" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#integer" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer" >1</AttributeValue>
+					</Apply>
+				</Apply>
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and" >
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:advisory" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string" >YELLOW</AttributeValue>
+					</Apply>
+
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:adult" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#integer" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer" >0</AttributeValue>
+					</Apply>
+				</Apply>
+			</Apply>
+
+		</Condition>
+
+		<Condition DecisionTime="post" >
+			<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:or" >
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and" >
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:advisory" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string" >RED</AttributeValue>
+					</Apply>
+
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-greater-than-or-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:child" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#integer" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer" >1</AttributeValue>
+					</Apply>
+				</Apply>
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and" >
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:advisory" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string" >YELLOW</AttributeValue>
+					</Apply>
+
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:adult" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#integer" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer" >0</AttributeValue>
+					</Apply>
+				</Apply>
+			</Apply>
+		</Condition>
+	</Rule>
+
+	<Rule Effect="Permit" RuleId="rule-permit" >
+		<Description >Permit</Description>
+		<Target >
+		</Target>
+		<ObligationExpressions>
+			<ObligationExpression ObligationId="sendPermit" FulfillOn="Permit"/>
+		</ObligationExpressions>
+		
+	
+	
+
+	</Rule>
+
+</Policy>

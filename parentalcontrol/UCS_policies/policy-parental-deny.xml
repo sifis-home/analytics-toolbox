@@ -1,0 +1,137 @@
+<Policy
+	xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" PolicyId="policy2Attributes" RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:deny-overrides" Version="3.0" >
+	<Description >Policy to be used in the use case with two attributes</Description>
+	<Target ></Target>
+
+
+	<Rule Effect="Deny" RuleId="rule-deny" >
+		<Target >
+			<AnyOf >
+				<AllOf >
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal" >
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string" >read</AttributeValue>
+						<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" ></AttributeDesignator>
+					</Match>
+				</AllOf>
+			</AnyOf>
+		</Target>
+		<ObligationExpressions>
+			<ObligationExpression ObligationId="SOFT" FulfillOn="Deny"/>
+		</ObligationExpressions>
+		
+		<!-- Pre condition -->
+		<Condition DecisionTime="pre" >
+			<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:or" >
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and" >
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:advisory" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string" >RED</AttributeValue>
+					</Apply>
+
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-greater-than-or-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:child" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#integer" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer" >1</AttributeValue>
+					</Apply>
+				</Apply>
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and" >
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:advisory" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string" >YELLOW</AttributeValue>
+					</Apply>
+
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:adult" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#integer" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer" >0</AttributeValue>
+					</Apply>
+				</Apply>
+			</Apply>
+		</Condition>
+		<!-- On going condition -->
+		<Condition DecisionTime="ongoing" >
+								<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:or" >
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and" >
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:advisory" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string" >RED</AttributeValue>
+					</Apply>
+
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-greater-than-or-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:child" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#integer" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer" >1</AttributeValue>
+					</Apply>
+				</Apply>
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and" >
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:advisory" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string" >YELLOW</AttributeValue>
+					</Apply>
+
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:adult" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#integer" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer" >0</AttributeValue>
+					</Apply>
+				</Apply>
+			</Apply>
+
+		</Condition>
+		<!-- Post condition -->
+		<Condition DecisionTime="post" >
+			<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:or" >
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and" >
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:advisory" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string" >RED</AttributeValue>
+					</Apply>
+
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-greater-than-or-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:child" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#integer" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer" >1</AttributeValue>
+					</Apply>
+				</Apply>
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and" >
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:advisory" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string" >YELLOW</AttributeValue>
+					</Apply>
+
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-equal" >
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-one-and-only" >
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:3.0:environment:adult" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#integer" MustBePresent="true" ></AttributeDesignator>
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer" >0</AttributeValue>
+					</Apply>
+				</Apply>
+			</Apply>
+		</Condition>
+	</Rule>
+
+
+	<Rule Effect="Permit" RuleId="rule-permit" >
+		<Description >Permit</Description>
+		<Target ></Target>
+
+	</Rule>
+
+</Policy>
