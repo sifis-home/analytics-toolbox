@@ -1,0 +1,32 @@
+#  ____  _   _  ___ _     ____
+# | __ )| | | ||_ _| |   |  _ \
+# |  _ \| | | | | || |   | | | |
+# | |_) | |_| | | || |___| |_| |
+# |____/ \___/ |___|_____|____/
+
+name: xAnomaly
+run-name: Official build started by ${{ github.actor }}
+on:
+  push:
+    branches:
+      - '*'
+jobs:
+  build:
+    runs-on: build
+    env:
+      LOCAL_BUILD: false
+      DOCKER_REGISTRY: ghcr.io/sifis-home/
+      DOCKER_IMAGE: ghcr.io/sifis-home/xanomaly:latest
+      REGISTRY_USER: ${{ secrets.DOCKERHUB_USERNAME }}
+      REGISTRY_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 18.12.1
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.12.1
+      - run: docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD $DOCKER_REGISTRY
+      - run: docker build -t $DOCKER_IMAGE .
+        working-directory: ./
+      - run: docker push $DOCKER_IMAGE
+        working-directory: ./
